@@ -24,9 +24,3 @@ def parse_network_trace_corrected(dump_lines):
                 data[ttl]['times'].append(response_times)
 
     return data
-
-# Example usage
-parsed_data_corrected = parse_network_trace_corrected(sample_dump_lines)
-parsed_data_corrected
-
-
