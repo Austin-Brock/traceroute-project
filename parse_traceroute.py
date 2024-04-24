@@ -35,17 +35,14 @@ def print_formatted_output(data):
             for time in times:
                 print(time)
 
-# Sample input from the network trace dump
-sample_dump_lines = [
-    '1296184417.509580 IP (tos 0x0, ttl 1, id 30632, offset 0, flags [none], proto TCP (6), length 60)',
-    '    128.192.76.178.35952 > 212.58.244.68.80: Flags [SEW], cksum 0xc2c4 (correct), seq 1857692485, win 5840, options [mss 1460,sackOK,TS val 1090680828 ecr 0,nop,wscale 2], length 0',
-    # Additional sample lines for demonstration
-    '1296184417.509599 IP (tos 0x0, ttl 2, id 30633, offset 0, flags [none], proto TCP (6), length 60)',
-    '    128.192.76.178.38611 > 212.58.244.68.80: Flags [SEW], cksum 0x97a4 (correct), seq 3741111231, win 5840, options [mss 1460,sackOK,TS val 1090680828 ecr 0,nop,wscale 2], length 0',
-]
+# Function to read from a file
+def read_from_file(filename):
+    with open(filename, 'r') as file:
+        return file.readlines()
 
-# Parsing the dump and preparing the formatted output
-parsed_data = parse_network_trace(sample_dump_lines)
-print_formatted_output(parsed_data)
-
-
+# Main execution block
+if __name__ == "__main__":
+    # Replace 'sampletcpdump.txt' with your actual file path if needed
+    dump_lines = read_from_file('sampletcpdump.txt')
+    parsed_data = parse_network_trace(dump_lines)
+    print_formatted_output(parsed_data)
