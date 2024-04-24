@@ -7,21 +7,18 @@ def parse_network_trace(dump_lines):
     for line in dump_lines:
         if 'IP' in line:
             parts = line.split()
-            timestamp = parts[0]
             ttl = int(re.search(r'ttl (\d+)', line).group(1))
-            if ttl not in data:
-                data[ttl] = {
-                    'timestamp': timestamp,
-                    'ips': [],
-                    'times': []
-                }
-        else:
             ip_match = re.search(r'(\d+\.\d+\.\d+\.\d+)\.\d+ > (\d+\.\d+\.\d+\.\d+)\.\d+', line)
             if ip_match:
                 src_ip, dst_ip = ip_match.groups()
-                # Simulate response times for demonstration purposes
-                response_times = [f"{round(random.uniform(3, 100), 3)} ms" for _ in range(3)]
+                if ttl not in data:
+                    data[ttl] = {
+                        'ips': [],
+                        'times': []
+                    }
                 data[ttl]['ips'].append(dst_ip)
+                # Simulate response times for demonstration purposes
+                response_times = [f"{round(random.uniform(0.3, 1.5), 3)} ms" for _ in range(3)]
                 data[ttl]['times'].append(response_times)
 
     return data
