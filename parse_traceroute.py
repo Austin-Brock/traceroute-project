@@ -30,7 +30,7 @@ def parse_log(file_path):
     return rtts
 
 if __name__ == "__main__":
-    file_path = 'sample_tcpdump.txt'  # Replace with your actual file path
+    file_path = 'tcpdum.txt'  # Replace with your actual file path
     rtts = parse_log(file_path)
     if rtts:
         print(f"TTL 1")
