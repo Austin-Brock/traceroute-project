@@ -36,7 +36,7 @@ def compute_delays(data):
     return output
 
 def main():
-    filename = "traceroute_data.txt"
+    filename = "sampletcpdump.txt"
     trace_data = parse_trace_file(filename)
     results = compute_delays(trace_data)
     for result in results:
@@ -44,4 +44,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
