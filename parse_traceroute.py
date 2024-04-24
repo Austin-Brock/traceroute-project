@@ -1,42 +1,47 @@
 import re
-from datetime import datetime
 
-def parse_log(file_path):
-    with open(file_path, 'r') as file:
-        logs = file.readlines()
+def parse_trace_file(filename):
+    data = {}
+    with open(filename, 'r') as file:
+        for line in file:
+            # Match lines with initial packet info
+            packet_info = re.search(r'(\d+\.\d+) IP.*? id (\d+),', line)
+            if packet_info:
+                data[packet_info.group(2)] = {'send_time': float(packet_info.group(1))}
+            
+            # Match lines with ICMP responses
+            icmp_info = re.search(r'(\d+\.\d+) IP.*? > (.*?): ICMP.*?id (\d+),', line)
+            if icmp_info:
+                router_ip = icmp_info.group(2).split(' > ')[0]
+                packet_id = icmp_info.group(3)
+                if packet_id in data:
+                    data[packet_id].update({
+                        'router_ip': router_ip,
+                        'response_time': float(icmp_info.group(1))
+                    })
 
-    # Regular expressions to capture the relevant data from the logs
-    packet_re = re.compile(r'(\d+\.\d+) IP.*id (\d+),')
-    icmp_re = re.compile(r'(\d+\.\d+) IP.*ICMP.*time exceeded.*id (\d+),')
+    return data
 
-    # Store outgoing packets and their timestamps
-    sent_packets = {}
-    for log in logs:
-        packet_match = packet_re.search(log)
-        if packet_match:
-            timestamp, packet_id = packet_match.groups()
-            sent_packets[packet_id] = float(timestamp)
+def compute_delays(data):
+    output = []
+    router_ip = set([info['router_ip'] for info in data.values() if 'router_ip' in info])
+    if len(router_ip) == 1:
+        router_ip = router_ip.pop()
+        output.append("TTL 1")
+        output.append(router_ip)
+        for key, value in data.items():
+            if 'response_time' in value:
+                delay = (value['response_time'] - value['send_time']) * 1000
+                output.append(f"{delay:.3f} ms")
+    return output
 
-    # Process ICMP messages and calculate RTT
-    rtts = []
-    for log in logs:
-        icmp_match = icmp_re.search(log)
-        if icmp_match:
-            timestamp, icmp_id = icmp_match.groups()
-            if icmp_id in sent_packets:
-                rtt = (float(timestamp) - sent_packets[icmp_id]) * 1000  # Convert to ms
-                rtts.append(rtt)
-
-    return rtts
+def main():
+    filename = "tracedump.txt"
+    trace_data = parse_trace_file(filename)
+    results = compute_delays(trace_data)
+    for result in results:
+        print(result)
 
 if __name__ == "__main__":
-    file_path = 'tcpdump.txt'  # Replace with your actual file path
-    rtts = parse_log(file_path)
-    if rtts:
-        print(f"TTL 1")
-        print(f"128.192.76.129")  # The router IP for TTL=1 as per the example log
-        print(f"{rtts[0]:.2f} ms")
-        print(f"{rtts[1]:.2f} ms")
-        print(f"{rtts[2]:.2f} ms")
-    else:
-        print("No ICMP responses found or log file empty.")
+    main()
+
