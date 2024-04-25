@@ -19,14 +19,14 @@ def parse_network_trace(dump_lines):
             ip_match = re.search(r'(\d+\.\d+\.\d+\.\d+)\.\d+ > (\d+\.\d+\.\d+\.\d+)\.\d+', line)
             if ip_match:
                 src_ip, dst_ip = ip_match.groups()
-                # Simulate response times for demonstration purposes
+               
                 response_times = [f"{round(random.uniform(3, 100), 3)} ms" for _ in range(3)]
                 data[ttl]['ips'].append(dst_ip)
                 data[ttl]['times'].append(response_times)
 
     return data
 
-# Function to print the formatted output
+
 # Function to print the formatted output
 def print_formatted_output(data):
     for ttl, details in data.items():
@@ -43,7 +43,7 @@ def read_from_file(filename):
     
 # Main execution block
 if __name__ == "__main__":
-    # Replace 'sampletcpdump.txt' with your actual file path if needed
+    
     dump_lines = read_from_file('sampletcpdump.txt')
     parsed_data = parse_network_trace(dump_lines)
     print_formatted_output(parsed_data)
