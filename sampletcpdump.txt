@@ -14,11 +14,11 @@
     128.192.76.178.50535 > 212.58.244.68.80: Flags [SEW], cksum 0xe97f (correct), seq 1683934702, win 5840, options [mss 1460,sackOK,TS val 1090680828 ecr 0,nop,wscale 2], length 0
 1296184417.509661 IP (tos 0x0, ttl 3, id 30639, offset 0, flags [none], proto TCP (6), length 60)
     128.192.76.178.37678 > 212.58.244.68.80: Flags [SEW], cksum 0x0f06 (correct), seq 1598742453, win 5840, options [mss 1460,sackOK,TS val 1090680828 ecr 0,nop,wscale 2], length 0
-1296184417.509671 IP (tos 0x0, ttl 3, id 30640, offset 0, flags [none], proto TCP (6), length 60)
+1296184417.509671 I0 > 212.58.244.68.80: Flags [SEW], cksum 0xde0c (correct), seq 4108348848, win 5840, options [mss 1460,sackOK,TS val 1090680828 ecr 0,nop,wscale 2], length 0
+1296184417.509690 IP (tP (tos 0x0, ttl 3, id 30640, offset 0, flags [none], proto TCP (6), length 60)
     128.192.76.178.33939 > 212.58.244.68.80: Flags [SEW], cksum 0x9123 (correct), seq 320649313, win 5840, options [mss 1460,sackOK,TS val 1090680828 ecr 0,nop,wscale 2], length 0
 1296184417.509681 IP (tos 0x0, ttl 4, id 30641, offset 0, flags [none], proto TCP (6), length 60)
-    128.192.76.178.41110 > 212.58.244.68.80: Flags [SEW], cksum 0xde0c (correct), seq 4108348848, win 5840, options [mss 1460,sackOK,TS val 1090680828 ecr 0,nop,wscale 2], length 0
-1296184417.509690 IP (tos 0x0, ttl 4, id 30642, offset 0, flags [none], proto TCP (6), length 60)
+    128.192.76.178.4111os 0x0, ttl 4, id 30642, offset 0, flags [none], proto TCP (6), length 60)
     128.192.76.178.59323 > 212.58.244.68.80: Flags [SEW], cksum 0x9be0 (correct), seq 169563005, win 5840, options [mss 1460,sackOK,TS val 1090680828 ecr 0,nop,wscale 2], length 0
 1296184417.509700 IP (tos 0x0, ttl 4, id 30643, offset 0, flags [none], proto TCP (6), length 60)
     128.192.76.178.50340 > 212.58.244.68.80: Flags [SEW], cksum 0x9fb6 (correct), seq 3507989441, win 5840, options [mss 1460,sackOK,TS val 1090680828 ecr 0,nop,wscale 2], length 0
