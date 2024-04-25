@@ -40,6 +40,14 @@ def print_formatted_output(data):
 def read_from_file(filename):
     with open(filename, 'r') as file:
         return file.readlines()
+    
+# Open the text file in read mode
+with open("sampletcpdump1.txt", "r") as file:
+    # Read the contents of the file
+    file_contents = file.read()
+    # Print the contents
+    print(file_contents)
+
 
 # Main execution block
 if __name__ == "__main__":
@@ -47,3 +55,4 @@ if __name__ == "__main__":
     dump_lines = read_from_file('sampletcpdump.txt')
     parsed_data = parse_network_trace(dump_lines)
     print_formatted_output(parsed_data)
+    
